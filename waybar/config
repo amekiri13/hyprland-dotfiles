@@ -6,29 +6,20 @@
     "margin-left": 8,
     "margin-right": 8,
     "margin-bottom": 0,
-    "height": 36,
+    "height": 38,
     "modules-left": ["hyprland/window"],
     "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["tray", "pulseaudio", "network", "memory", "cpu", "battery", "clock"],
+    "modules-right": ["tray", "pulseaudio", "network", "custom/memory", "custom/compute", "clock"],
     "hyprland/workspaces": {
-        "format": "{icon}",
-        "persistent-workspaces": {
-            "DP-3": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            "HDMI-A-1": [ 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-        },
+        "format": "{name}",
+        "ignore-workspaces": ["^(?!([1-9]|10)$).+"],
+        "sort-by": "number",
         "on-click": "activate",
         "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "format-icons": {
-		    "1": "\uf303",
-            "2": "\uf121",
-		    "3": "\uf484",
-            "4": "\uf013",
-            "5": "\uf11b"
-	    }
+        "on-scroll-down": "hyprctl dispatch workspace e-1"
     },
     "hyprland/window": {
-        "format": "\uf105 {initialTitle}",
+        "format": "\uf105 {title}",
         "separate-outputs": true
     },
     "tray": {
@@ -40,7 +31,6 @@
         "format": "\uf017 {:%H:%M:%S}",
         "format-alt": "\uf133 {:%Y-%m-%d %H:%M:%S}",
         "tooltip-format": "{calendar}",
-		"timezone": "Asia/Chongqing",
         "calendar": {
             "mode"          : "month",
             "mode-mon-col"  : 3,
@@ -62,16 +52,21 @@
             "on-scroll-down": "shift_down"
         }
     },
-    "cpu": {
+    "custom/compute": {
+        "exec": "sh $HOME/.config/waybar/compute-view.sh",
+        "return-type": "json",
+        "format": "{text}",
         "interval": 1,
-        "format": "\uf4bc {usage:>3}%",
+        "on-click": "sh $HOME/.config/waybar/compute-view.sh toggle",
         "tooltip": true
     },
-    "memory": {
+    "custom/memory": {
+        "exec": "sh $HOME/.config/waybar/memory-view.sh",
+        "return-type": "json",
+        "format": "{text}",
         "interval": 1,
-        "format": "\uefc5 {used:>4.1f}G",
-        "tooltip": true,
-        "tooltip-format": " RAM: {used:0.2f}G / {total:0.2f}G\nSwap: {swapUsed:0.2f}G / {swapTotal:0.2f}G"
+        "on-click": "sh $HOME/.config/waybar/memory-view.sh toggle",
+        "tooltip": true
     },
     "network": {
         "interval": 1,
@@ -91,18 +86,6 @@
         "format-icons": {
             "default": ["\uf026", "\uf027", "\uf028"]
         },
-        "on-click-right": "pavucontrol",
-        "ignored-sinks": ["AudioRelay Virtual Sink", "Recorder Sink"]
-    },
-    "battery": {
-        "bat": "BAT2",
-        "interval": 60,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity:2}% {icon}",
-        "format-icons": ["", "", "", "", ""],
-        "max-length": 25
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
     }
 }
