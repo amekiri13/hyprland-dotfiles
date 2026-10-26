@@ -12,7 +12,8 @@
     "modules-right": ["tray", "pulseaudio", "network", "custom/memory", "custom/compute", "clock"],
     "ext/workspaces": {
         "format": "{name}",
-        "sort-by-id": true,
+        "sort-by-id": false,
+        "sort-by-name": true,
         "on-click": "activate",
         "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
         "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'"
