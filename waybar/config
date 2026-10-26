@@ -8,15 +8,14 @@
     "margin-bottom": 0,
     "height": 38,
     "modules-left": ["hyprland/window"],
-    "modules-center": ["hyprland/workspaces"],
+    "modules-center": ["ext/workspaces"],
     "modules-right": ["tray", "pulseaudio", "network", "custom/memory", "custom/compute", "clock"],
-    "hyprland/workspaces": {
+    "ext/workspaces": {
         "format": "{name}",
-        "ignore-workspaces": ["^(?!([1-9]|10)$).+"],
-        "sort-by": "number",
+        "sort-by-id": true,
         "on-click": "activate",
-        "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1"
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'"
     },
     "hyprland/window": {
         "format": "\uf105 {title}",
