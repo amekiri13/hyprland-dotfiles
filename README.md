@@ -2,7 +2,7 @@
 
 Personal desktop configuration using Hyprland's Lua configuration, a glass-style Waybar, Dunst, Kitty, Hyprlock and Hyprpaper. These files are tailored to one machine, not a universal installer.
 
-The existing `screenshot.jpg` and `screenshot.png` are historical previews and may not match the current configuration.
+![Current Hyprland desktop](images/desktop-redacted.png)
 
 ## Current setup
 
